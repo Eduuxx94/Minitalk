@@ -6,7 +6,7 @@
 #    By: ede-alme <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/21 17:10:07 by ede-alme          #+#    #+#              #
-#    Updated: 2022/06/17 21:31:58 by ede-alme         ###   ########.fr        #
+#    Updated: 2022/06/21 09:27:10 by ede-alme         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,18 +22,20 @@ SANITIZE = -fsanitize=address
 CC = gcc
 
 #Sources bellow:
-SOURCE_SERVER = ./Servers/server.c
-SOURCE_CLIENT = ./Clients/client.c
+SOURCE_SERVER = ./servers/server.c
+SOURCE_CLIENT = ./clients/client.c
+#SOURCE_INCLUD = ./includes/
 
 #Objects bellow:
 OBJ_SERVER = $(SOURCE_SERVER:.c=.o)
 OBJ_CLIENT = $(SOURCE_CLIENT:.c=.o)
-
-#Rule mandatory:
-all: $(NAME_SERVER) $(NAME_CLIENT)
+#OBJ_INCLUD = $(SOURCE_INCLUD:.c=.o)
 
 %.o: %.c
 	$(CC) $(SANITIZE) $(FLAGS) -c $< -o $@
+
+#Rule mandatory:
+all: $(NAME_SERVER) $(NAME_CLIENT)
 
 #Mandatory:
 $(NAME_SERVER): $(OBJ_SERVER)
@@ -47,7 +49,7 @@ clean:
 
 fclean: clean
 	@rm -f $(NAME_SERVER) $(NAME_CLIENT)
-	@echo "All clear :)"
+	@echo "All clear"
 	
 re: fclean all
 	
